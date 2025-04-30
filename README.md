@@ -1,147 +1,124 @@
-# Monad Testnet MCP
+# Monad Testnet Token Research & Analysis Tool
 
+## Table of Contents
+- [Overview](#overview)
+- [Usage Flows](#usage-flows)
+  - [Discovering and Analyzing New Opportunities](#1-discovering-and-analyzing-new-opportunities)
+  - [Portfolio Management](#2-portfolio-management)
+  - [Risk Management](#3-risk-management)
+- [Key Features](#key-features)
+  - [Token Research](#token-research)
+  - [Technical Analysis](#technical-analysis)
+  - [Risk Management](#risk-management)
+  - [Portfolio Tools](#portfolio-tools)
+- [Installation](#installation)
+- [Configuration](#configuration-for-claude-desktop)
+- [Development](#development)
+
+## Overview
 A comprehensive token analysis tool that provides detailed research reports for tokens on the Monad testnet. This tool combines both fundamental and technical analysis to deliver comprehensive token insights.
 
-## Usage Flow & Scenarios
+## Usage Flows
 
-### Scenario 1: Discovering and Analyzing New Opportunities
-1. **Initial Discovery**
-   - Use `scan-trending-tokens` to find:
-     - Newly listed tokens
-     - Trending tokens by volume
-     - Top tokens by market cap
-   - This helps identify potential investment opportunities
+### 1. Discovering and Analyzing New Opportunities
+```
+┌─────────────────────────────────────────────────────────┐
+│                     Start                               │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Scan Trending Tokens                     │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Quick Research                          │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Deep Analysis                           │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Trading Decision                        │
+└─────────────────────────────────────────────────────────┘
+```
 
-2. **Quick Research**
-   - For interesting tokens found, use `token-research-report`
-   - Get immediate insights on:
-     - Token fundamentals
-     - Market statistics
-     - Basic risk assessment
-   - Helps filter out high-risk tokens quickly
+### 2. Portfolio Management
+```
+┌─────────────────────────────────────────────────────────┐
+│                     Start                               │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Check MON Balance                       │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Analyze Portfolio                       │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Token Research                          │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Rebalancing Decision                    │
+└─────────────────────────────────────────────────────────┘
+```
 
-3. **Deep Analysis**
-   - For promising tokens, use `market-analysis`
-   - Get comprehensive technical and market analysis:
-     - Technical indicators
-     - Market health
-     - Whale concentration
-     - Liquidity depth
-   - Make informed trading decisions
+### 3. Risk Management
+```
+┌─────────────────────────────────────────────────────────┐
+│                     Start                               │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Market Overview                         │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Risk Assessment                         │
+└───────────────┬─────────────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────────────┐
+│                 Portfolio Protection                    │
+└─────────────────────────────────────────────────────────┘
+```
 
-### Scenario 2: Portfolio Management
-1. **Balance Check**
-   - Start with `get-mon-balance` to check your MON holdings
-   - Understand your available capital
+## Key Features
 
-2. **Portfolio Analysis**
-   - Use `analyze-portfolio` to:
-     - View current holdings
-     - Track performance
-     - Monitor PnL
-   - Identify underperforming assets
+### Token Research
+- Metadata Analysis
+- Market Information
+- Holder Analysis
+- Risk Assessment
 
-3. **Token Research**
-   - For each holding, use `token-research-report`
-   - Monitor:
-     - Recent developments
-     - Holder changes
-     - Market sentiment
-   - Make rebalancing decisions
+### Technical Analysis
+- Moving Averages
+- RSI
+- Bollinger Bands
+- MACD
 
-### Scenario 3: Risk Management
-1. **Market Overview**
-   - Use `scan-trending-tokens` to:
-     - Monitor market trends
-     - Identify sector movements
-     - Spot emerging patterns
+### Risk Management
+- Whale Analysis
+- Liquidity Check
+- Volatility Tracking
 
-2. **Risk Assessment**
-   - For each position, use `market-analysis` to:
-     - Check liquidity health
-     - Monitor whale movements
-     - Track volatility
-   - Set appropriate stop-loss levels
-
-3. **Portfolio Protection**
-   - Use `analyze-portfolio` to:
-     - Check portfolio concentration
-     - Monitor correlation
-     - Adjust position sizes
-   - Maintain risk-balanced portfolio
-
-## Usage Scenarios
-
-### 1. Token Research & Analysis
-**When to use**: When you need a comprehensive overview of a token
-**Tool**: `token-research-report`
-**What you get**:
-- Token metadata and basic information
-- Market statistics and price trends
-- Holder distribution and whale analysis
-- Recent trading activity
-- Risk assessment and suggestions
-
-### 2. Market Analysis & Technical Indicators
-**When to use**: For in-depth market analysis and trading decisions
-**Tool**: `market-analysis`
-**What you get**:
-- Technical indicators (MA, RSI, Bollinger Bands, MACD)
-- Market health indicators
-- Liquidity analysis
-- Whale concentration metrics
-- Volume and volatility analysis
-- Support and resistance levels
-
-### 3. Portfolio Tracking
-**When to use**: To monitor and analyze your token holdings
-**Tool**: `analyze-portfolio`
-**What you get**:
-- Portfolio value and composition
-- Individual token performance
-- Profit/loss tracking
-- Portfolio diversification metrics
-
-### 4. Token Discovery
-**When to use**: To find new and trending tokens
-**Tool**: `scan-trending-tokens`
-**What you get**:
-- Newly listed tokens
-- Trending tokens by volume
-- Top tokens by market cap
-- Quick access to research reports
-
-### 5. Balance Checking
-**When to use**: To check MON token balances
-**Tool**: `get-mon-balance`
-**What you get**:
-- Current MON token balance
-- Balance history
-- Transaction summary
-
-## Features
-
-- **Token Research Reports**
-  - Detailed token metadata analysis
-  - Market information and price tracking
-  - Holder analysis and whale detection
-  - Risk assessment and market sentiment
-  - Recent swap history analysis
-
-- **Technical Analysis**
-  - Moving Averages (MA) calculation
-  - Relative Strength Index (RSI) analysis
-  - Bollinger Bands analysis
-  - MACD (Moving Average Convergence Divergence)
-  - Support and Resistance level identification
-  - Price trend determination
-  - Trading signal generation
-
-- **Risk Assessment**
-  - Whale concentration analysis
-  - Price trend risk evaluation
-  - Market sentiment indicators
-  - Bullish/Bearish percentage calculation
+### Portfolio Tools
+- Balance Tracking
+- Performance Analysis
+- PnL Monitoring
 
 ## Installation
 
