@@ -224,27 +224,41 @@ server.tool(
 
       // Create a markdown table for each category
       const newTokensTable = [
-        "| Token | Name | Market Cap | Price | Research |",
-        "|-------|------|------------|-------|----------|",
-        ...newTokens.map((token: { token_info: { symbol: string; name: string; token_address: string }; market_info: { price: string } }) => 
-          `| ${token.token_info.symbol} | ${token.token_info.name} | ${token.market_info.price} | ${token.market_info.price} | [Research](token-research-report?tokenAddress=${token.token_info.token_address}) |`
-        )
+        "| Token | Name | Market Cap | FDV | Price | Research |",
+        "|-------|------|------------|-----|-------|----------|",
+        ...newTokens.map((token: { token_info: { symbol: string; name: string; token_address: string; total_supply: string; circulating_supply: string }; market_info: { price: string } }) => {
+          const priceInMon = parseFloat(token.market_info.price);
+          const circulatingSupply = parseFloat(token.token_info.circulating_supply || token.token_info.total_supply);
+          const totalSupply = parseFloat(token.token_info.total_supply);
+          // Divide by 1e9 to convert from T to K range
+          const marketCap = (priceInMon * circulatingSupply) / 1e9;
+          const fdv = (priceInMon * totalSupply) / 1e9;
+          return `| ${token.token_info.symbol} | ${token.token_info.name} | ${formatNumber(marketCap)} MON | ${formatNumber(fdv)} MON | ${priceInMon} MON | [Research](token-research-report?tokenAddress=${token.token_info.token_address}) |`;
+        })
       ].join("\n");
 
       const trendingTokensTable = [
-        "| Token | Name | Market Cap | Price | Research |",
-        "|-------|------|------------|-------|----------|",
-        ...trendingTokens.map((token: { token_info: { symbol: string; name: string; token_address: string }; market_info: { price: string } }) => 
-          `| ${token.token_info.symbol} | ${token.token_info.name} | ${token.market_info.price} | ${token.market_info.price} | [Research](token-research-report?tokenAddress=${token.token_info.token_address}) |`
-        )
+        "| Token | Name | Total Supply | Creator | Price | Research |",
+        "|-------|------|--------------|---------|-------|----------|",
+        ...trendingTokens.map((token: { token_info: { symbol: string; name: string; token_address: string; total_supply: string; creator: string }; market_info: { price: string } }) => {
+          const priceInMon = parseFloat(token.market_info.price);
+          const totalSupply = parseFloat(token.token_info.total_supply);
+          return `| ${token.token_info.symbol} | ${token.token_info.name} | ${formatNumber(totalSupply)} | ${token.token_info.creator} | ${priceInMon} MON | [Research](token-research-report?tokenAddress=${token.token_info.token_address}) |`;
+        })
       ].join("\n");
 
       const topTokensTable = [
-        "| Token | Name | Market Cap | Price | Research |",
-        "|-------|------|------------|-------|----------|",
-        ...topTokens.map((token: { token_info: { symbol: string; name: string; token_address: string }; market_info: { price: string } }) => 
-          `| ${token.token_info.symbol} | ${token.token_info.name} | ${token.market_info.price} | ${token.market_info.price} | [Research](token-research-report?tokenAddress=${token.token_info.token_address}) |`
-        )
+        "| Token | Name | Market Cap | FDV | Price | Research |",
+        "|-------|------|------------|-----|-------|----------|",
+        ...topTokens.map((token: { token_info: { symbol: string; name: string; token_address: string; total_supply: string; circulating_supply: string }; market_info: { price: string } }) => {
+          const priceInMon = parseFloat(token.market_info.price);
+          const circulatingSupply = parseFloat(token.token_info.circulating_supply || token.token_info.total_supply);
+          const totalSupply = parseFloat(token.token_info.total_supply);
+          // Divide by 1e9 to convert from T to K range
+          const marketCap = (priceInMon * circulatingSupply) / 1e9;
+          const fdv = (priceInMon * totalSupply) / 1e9;
+          return `| ${token.token_info.symbol} | ${token.token_info.name} | ${formatNumber(marketCap)} MON | ${formatNumber(fdv)} MON | ${priceInMon} MON | [Research](token-research-report?tokenAddress=${token.token_info.token_address}) |`;
+        })
       ].join("\n");
 
       return {
@@ -252,6 +266,7 @@ server.tool(
           {
             type: "text",
             text: `# New & Trending Tokens Scanner\n\n` +
+                  `*Note: Market Cap is calculated using circulating supply, while FDV (Fully Diluted Value) uses total supply*\n\n` +
                   `## New Tokens\n${newTokensTable}\n\n` +
                   `## Trending Tokens\n${trendingTokensTable}\n\n` +
                   `## Top Tokens by Market Cap\n${topTokensTable}`
